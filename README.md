@@ -10,6 +10,8 @@ It supports:
 - `@owner/` references that list matching locally configured aliases.
 - Local checkout verification against the Git `origin` remote.
 - An explicit confirmation step before cloning an absent repository.
+- A built-in Bash/View fallback for organizations that block third-party MCP
+  servers.
 
 ## Install
 
