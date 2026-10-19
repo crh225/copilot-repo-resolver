@@ -5,13 +5,13 @@
   },
   "metadata": {
     "description": "Generic local repository resolution tools for Copilot.",
-    "version": "0.1.3"
+    "version": "0.1.4"
   },
   "plugins": [
     {
       "name": "copilot-repo-resolver",
       "description": "Resolve local repository aliases and clone missing repositories with confirmation.",
-      "version": "0.1.3",
+      "version": "0.1.4",
       "source": "."
     }
   ]

@@ -66,12 +66,18 @@ aliases, repository names, or local filesystem details to this repository.
 
 ## Use
 
-Ask the resolver agent to resolve a reference:
+After `/restart`, select the resolver agent for the current session:
 
 ```text
-Resolve @web
-Resolve @example-org/storefront
-Resolve @example-org/
+/agent repository-resolver
+```
+
+Then ask it to resolve an alias or repository:
+
+```text
+Resolve web
+Resolve example-org/storefront
+Resolve repositories for example-org
 ```
 
 For an existing checkout with the expected origin, the resolver returns its
@@ -79,8 +85,13 @@ local path. If the checkout is missing, it identifies the intended clone target
 and asks for explicit approval before cloning. If a directory exists with a
 different origin, it reports the mismatch and does not change the directory.
 
-`@alias` is resolver input, not global Copilot dispatch syntax. Invoke the
-resolver agent or skill when you want this behavior.
+Copilot CLI reserves `@` for file mentions, so do **not** enter `@web` at the
+prompt: it opens the file picker before the agent can resolve the alias. Use
+the alias without `@` after selecting the resolver agent.
+
+The plugin uses Copilot's built-in Bash and View tools only. It does not need a
+third-party MCP server, so it works in organizations that block third-party MCP
+servers.
 
 ## Development
 
