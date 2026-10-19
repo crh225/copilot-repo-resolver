@@ -5,9 +5,9 @@ resolving short repository aliases to verified local Git checkouts.
 
 It supports:
 
-- `@alias` references configured on the current machine.
-- Direct `@owner/repository` references.
-- `@owner/` references that list matching locally configured aliases.
+- Alias references configured on the current machine, such as `flux`.
+- Direct `owner/repository` references.
+- Bare owner references that list matching locally configured aliases.
 - Local checkout verification against the Git `origin` remote.
 - An explicit confirmation step before cloning an absent repository.
 - Built-in Bash/View operations only, so it works when organizations block
@@ -85,9 +85,8 @@ local path. If the checkout is missing, it identifies the intended clone target
 and asks for explicit approval before cloning. If a directory exists with a
 different origin, it reports the mismatch and does not change the directory.
 
-Copilot CLI reserves `@` for file mentions, so do **not** enter `@web` at the
-prompt: it opens the file picker before the agent can resolve the alias. Use
-the alias without `@` after selecting the resolver agent.
+Copilot CLI reserves `@` for file mentions, so aliases must be entered without
+an `@` prefix after selecting the resolver agent.
 
 The plugin uses Copilot's built-in Bash and View tools only. It does not need a
 third-party MCP server, so it works in organizations that block third-party MCP

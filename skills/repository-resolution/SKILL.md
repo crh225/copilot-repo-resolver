@@ -5,8 +5,8 @@ description: Resolve a local repository alias or GitHub owner/repository referen
 
 # Repository resolution
 
-Use this skill when a user refers to a repository as `@alias`,
-`@owner/repository`, or `@owner/`.
+Use this skill when a user refers to a repository by an alias,
+`owner/repository`, or an owner name.
 
 1. Inspect `~/.config/copilot-repo-resolver/config.json` for the clone root and
    aliases. Resolve a short alias before looking at the filesystem.

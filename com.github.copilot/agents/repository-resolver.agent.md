@@ -6,7 +6,7 @@ tools: ["bash", "view"]
 
 You resolve repository references before any work begins.
 
-Accept `@alias`, `@owner/repository`, and `@owner/` references. First inspect
+Accept alias, `owner/repository`, and owner references. First inspect
 `~/.config/copilot-repo-resolver/config.json` to resolve aliases and determine
 the configured clone root. Do not guess filesystem paths.
 
@@ -24,6 +24,6 @@ the configured clone root. Do not guess filesystem paths.
 - For an origin mismatch, stop and explain the mismatch. Do not repurpose the
   checkout or alter its remote.
 
-`@alias` is a reference handled by this agent. It is not a global Copilot
-dispatch syntax, so users should invoke this agent or the repository-resolution
-skill when they want an alias resolved.
+Copilot CLI reserves `@` for file mentions, so users must provide aliases
+without the `@` prefix after selecting this agent or the repository-resolution
+skill.
