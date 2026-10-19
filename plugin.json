@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "copilot-repo-resolver",
+  "version": "0.1.0",
+  "description": "Resolve local repository aliases and clone missing repositories with confirmation.",
+  "author": {
+    "name": "crh225"
+  },
+  "repository": "https://github.com/crh225/copilot-repo-resolver",
+  "license": "MIT",
+  "keywords": ["repository", "aliases", "local-development", "git"]
+}

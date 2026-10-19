@@ -1,0 +1,7 @@
+{
+  "repositoriesRoot": "~/development",
+  "aliases": {
+    "storefront": "example-org/storefront",
+    "api": "example-org/api-service"
+  }
+}

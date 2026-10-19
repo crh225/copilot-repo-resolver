@@ -1,0 +1,92 @@
+# Copilot Repository Resolver
+
+Copilot Repository Resolver is a public, generic GitHub Copilot plugin for
+resolving short repository aliases to verified local Git checkouts.
+
+It supports:
+
+- `@alias` references configured on the current machine.
+- Direct `@owner/repository` references.
+- `@owner/` references that list matching locally configured aliases.
+- Local checkout verification against the Git `origin` remote.
+- An explicit confirmation step before cloning an absent repository.
+
+## Install
+
+Install directly from GitHub:
+
+```shell
+copilot plugin install crh225/copilot-repo-resolver
+```
+
+Verify that Copilot loaded it:
+
+```shell
+copilot plugin list
+```
+
+Start a new Copilot session, then select the `repository-resolver` agent or use
+the `repository-resolution` skill when you want a reference resolved.
+
+## Configure aliases
+
+Copy [`examples/config.json`](examples/config.json) to:
+
+```text
+~/.config/copilot-repo-resolver/config.json
+```
+
+Then replace the example values with your own local aliases:
+
+```json
+{
+  "repositoriesRoot": "~/development",
+  "aliases": {
+    "web": "example-org/storefront",
+    "api": "example-org/api-service"
+  }
+}
+```
+
+The expected checkout path is
+`<repositoriesRoot>/<owner>/<repository>`. The resolver verifies that path's
+Git `origin` before treating it as the requested repository.
+
+Alias configuration is deliberately local. Do not commit your organization's
+aliases, repository names, or local filesystem details to this repository.
+
+## Use
+
+Ask the resolver agent to resolve a reference:
+
+```text
+Resolve @web
+Resolve @example-org/storefront
+Resolve @example-org/
+```
+
+For an existing checkout with the expected origin, the resolver returns its
+local path. If the checkout is missing, it identifies the intended clone target
+and asks for explicit approval before cloning. If a directory exists with a
+different origin, it reports the mismatch and does not change the directory.
+
+`@alias` is resolver input, not global Copilot dispatch syntax. Invoke the
+resolver agent or skill when you want this behavior.
+
+## Development
+
+The MCP server uses Python's standard library. Run its tests with:
+
+```shell
+uv run --with pytest pytest
+```
+
+For a local plugin check:
+
+```shell
+copilot plugin install .
+copilot plugin list
+```
+
+In a new Copilot session, verify the custom agent with `/agent`, the skill with
+`/skills list`, and the MCP server with `/mcp`.
