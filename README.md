@@ -54,9 +54,10 @@ Then replace the example values with your own local aliases:
 }
 ```
 
-The expected checkout path is
-`<repositoriesRoot>/<owner>/<repository>`. The resolver verifies that path's
-Git `origin` before treating it as the requested repository.
+The resolver prefers `<repositoriesRoot>/<owner>/<repository>`, then scans
+one directory level below the configured root for a checkout whose Git `origin`
+matches the requested repository. This supports alternate local worktree names
+without sacrificing remote verification.
 
 Alias configuration is deliberately local. Do not commit your organization's
 aliases, repository names, or local filesystem details to this repository.

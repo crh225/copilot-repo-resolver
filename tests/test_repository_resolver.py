@@ -53,6 +53,23 @@ def test_reports_missing_checkout(monkeypatch, tmp_path):
     assert result["repository"] == "example-org/storefront"
 
 
+def test_finds_verified_checkout_outside_the_canonical_path(monkeypatch, tmp_path):
+    configure(monkeypatch, tmp_path, {"web": "example-org/storefront"})
+    checkout = tmp_path / "repos" / "worktrees" / "storefront-feature"
+    checkout.mkdir(parents=True)
+    monkeypatch.setattr(
+        resolver,
+        "origin_for",
+        lambda path: "example-org/storefront" if path == checkout else None,
+    )
+
+    assert resolver.resolve_repository("@web") == {
+        "status": "found",
+        "repository": "example-org/storefront",
+        "path": str(checkout),
+    }
+
+
 def test_reports_origin_mismatch(monkeypatch, tmp_path):
     configure(monkeypatch, tmp_path, {"web": "example-org/storefront"})
     checkout = tmp_path / "repos" / "example-org" / "storefront"

@@ -69,6 +69,18 @@ def origin_for(path: Path) -> str | None:
     return normalize_origin(result.stdout) if result.returncode == 0 else None
 
 
+def find_checkout(root: Path, repository: str) -> Path | None:
+    """Find a verified checkout, preferring the canonical owner/repository path."""
+    canonical = root / repository
+    if canonical.is_dir():
+        return canonical
+
+    for candidate in root.glob("*/*"):
+        if candidate.is_dir() and origin_for(candidate) == repository:
+            return candidate
+    return None
+
+
 def resolve_repository(reference: str) -> dict[str, Any]:
     """Resolve a repository reference without modifying local state."""
     config = load_config()
@@ -81,9 +93,10 @@ def resolve_repository(reference: str) -> dict[str, Any]:
 
     assert value is not None
     root = Path(os.path.expanduser(config["repositoriesRoot"])).resolve()
-    checkout = root / value
-    if not checkout.is_dir():
-        return {"status": "missing", "repository": value, "path": str(checkout)}
+    expected_checkout = root / value
+    checkout = find_checkout(root, value)
+    if checkout is None:
+        return {"status": "missing", "repository": value, "path": str(expected_checkout)}
 
     origin = origin_for(checkout)
     if origin != value:
