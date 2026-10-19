@@ -10,8 +10,8 @@ It supports:
 - `@owner/` references that list matching locally configured aliases.
 - Local checkout verification against the Git `origin` remote.
 - An explicit confirmation step before cloning an absent repository.
-- A built-in Bash/View fallback for organizations that block third-party MCP
-  servers.
+- Built-in Bash/View operations only, so it works when organizations block
+  third-party MCP servers.
 
 ## Install
 
@@ -84,12 +84,6 @@ resolver agent or skill when you want this behavior.
 
 ## Development
 
-The MCP server uses Python's standard library. Run its tests with:
-
-```shell
-uv run --with pytest pytest
-```
-
 For a local plugin check:
 
 ```shell
@@ -97,5 +91,5 @@ copilot plugin install .
 copilot plugin list
 ```
 
-In a new Copilot session, verify the custom agent with `/agent`, the skill with
-`/skills list`, and the MCP server with `/mcp`.
+In a new Copilot session, verify the custom agent with `/agent` and the skill
+with `/skills list`.
