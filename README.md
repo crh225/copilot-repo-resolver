@@ -13,10 +13,16 @@ It supports:
 
 ## Install
 
-Install directly from GitHub:
+Register the public plugin marketplace:
 
 ```shell
-copilot plugin install crh225/copilot-repo-resolver
+copilot plugin marketplace add crh225/copilot-repo-resolver
+```
+
+Install the plugin from that marketplace:
+
+```shell
+copilot plugin install copilot-repo-resolver@copilot-repo-resolver-marketplace
 ```
 
 Verify that Copilot loaded it:
